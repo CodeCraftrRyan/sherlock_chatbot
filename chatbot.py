@@ -47,10 +47,16 @@ def query_book(question, top_k=3):
     return "\n\n---\n\n".join(results)
 
 # Step 6: Chat Loop
-while True:
-    query = input("Ask Sherlock Bot (or type 'exit'): ")
-    if query.lower() in ['exit', 'quit']:
-        break
-    answer = query_book(query)
-    print("\n🔎 Answer:\n", answer)
-    print("\n=========================\n")
+import streamlit as st
+
+st.title("🔍 Sherlock Bot")
+st.subheader("Ask questions about *A Study in Scarlet* by Arthur Conan Doyle")
+
+user_input = st.text_input("Your question:")
+
+if user_input:
+    response = query_book(user_input)
+    st.markdown("**Answer:**")
+    st.write(response)
+    
+st.write("✅ Reached data loading stage...")
